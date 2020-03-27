@@ -6,6 +6,20 @@ This is little project what serves data (classifieds, localizations, users info)
 * localhost:3000/classifieds/{item}
 * localhost:3000/classifieds?title={title}
 
+
+
+## Setup
+``` sh 
+make postgres
+make adminer
+make migrate
+```
+## Database
+http://localhost:8080/
+* Credentials:
+user: postgres, 
+password: secret
+
 ## In the future:
 ### Adding endpoints
 * localhost:3000/classifieds/{id}
