@@ -13,6 +13,7 @@ This is little project what serves data (classifieds, localizations, users info)
 make postgres
 make adminer
 make migrate
+go run main.go
 ```
 ## Database
 http://localhost:8080/
