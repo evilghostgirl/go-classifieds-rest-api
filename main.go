@@ -1,9 +1,8 @@
 package main
 
 import (
+	"classifieds-rest-api/packages/handlers"
 	"classifieds-rest-api/packages/persistence"
-	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -16,58 +15,21 @@ func main() {
 	// http.ListenAndServe(":3000", nil)
 
 	r := mux.NewRouter()
-	r.HandleFunc("/classifieds", listClassifiedsByTitle1).Methods("GET").Queries("title", "{title}")
+	r.HandleFunc("/classifieds", handlers.ListClassifiedsByTitle1).Methods("GET").Queries("title", "{title}")
+	r.HandleFunc("/classifieds", handlers.ListClassifiedsByLocalizationID).Methods("GET").Queries("localizationid", "{localizationid}")
+	r.HandleFunc("/classifieds", handlers.ListAllClassifieds).Methods("GET")
+	r.HandleFunc("/classifieds/", handlers.ListAllClassifieds).Methods("GET")
+	r.HandleFunc("/classifieds/{ID}", handlers.ListClassifiedByID).Methods("GET")
 
-	r.HandleFunc("/classifieds", listAllClassifieds).Methods("GET")
-	r.HandleFunc("/classifieds/{title}", listClassifiedsByTitle).Methods("GET")
+	r.HandleFunc("/categories/{ID}", handlers.ListCategoryByID).Methods("GET")
+	r.HandleFunc("/categories", handlers.ListAllCategories).Methods("GET")
+	r.HandleFunc("/categories/", handlers.ListAllCategories).Methods("GET")
+
+	r.HandleFunc("/users", handlers.ListUsersByLocalizationID).Methods("GET").Queries("localizationid", "{localizationid}")
+	r.HandleFunc("/users/{ID}", handlers.ListUserByID).Methods("GET")
+	r.HandleFunc("/users", handlers.ListAllUsers).Methods("GET")
+	r.HandleFunc("/users/", handlers.ListAllUsers).Methods("GET")
 
 	http.ListenAndServe(":3000", r)
-
-}
-
-func listAllClassifieds(w http.ResponseWriter, r *http.Request) {
-
-	bks, err := persistence.GetAllClassifieds()
-	if err != nil {
-		http.Error(w, http.StatusText(500), 500)
-
-	}
-	w.Header().Set("Content-Type", "application/json")
-
-	if err := json.NewEncoder(w).Encode(bks); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-
-}
-
-func listClassifiedsByTitle(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-
-	bks, err := persistence.GetClassifiedsByTitle(vars["title"])
-	if err != nil {
-		http.Error(w, http.StatusText(500), 500)
-
-	}
-	w.Header().Set("Content-Type", "application/json")
-
-	if err := json.NewEncoder(w).Encode(bks); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-
-}
-
-func listClassifiedsByTitle1(w http.ResponseWriter, r *http.Request) {
-	title := r.FormValue("title")
-	fmt.Printf("title: %s", title)
-	bks, err := persistence.GetClassifiedsByTitle(title)
-	if err != nil {
-		http.Error(w, http.StatusText(500), 500)
-
-	}
-	w.Header().Set("Content-Type", "application/json")
-
-	if err := json.NewEncoder(w).Encode(bks); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
 
 }
