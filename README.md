@@ -13,6 +13,7 @@ This is little project what serves data (classifieds, localizations, users info)
 make postgres
 make adminer
 make migrate
+go run main.go
 ```
 ## Database
 http://localhost:8080/
@@ -38,3 +39,5 @@ password: secret
 * Authorized users could add new data
 * Owner can edit his data, but nobody else
 * New roles - basic user, admin
+
+### Tests
