@@ -2,42 +2,27 @@ package persistence
 
 import (
 	"classifieds-rest-api/packages/models"
+	"database/sql"
 )
 
 func GetAllCategories() ([]*models.Category, error) {
 	rows, err := db.Query("SELECT * FROM categories")
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	bks := make([]*models.Category, 0)
-	for rows.Next() {
-		bk := new(models.Category)
-		err := rows.Scan(
-			&bk.ID,
-			&bk.Title,
-			&bk.Description,
-		)
-		if err != nil {
-			return nil, err
-		}
-		bks = append(bks, bk)
-	}
-	if err = rows.Err(); err != nil {
-		return nil, err
-	}
-	return bks, nil
+	return parseToTableOfCategories(rows, err)
 }
 
 func GetCategoryByID(ID string) ([]*models.Category, error) {
 	rows, err := db.Query("SELECT * FROM categories WHERE id = $1 ", ID)
+	return parseToTableOfCategories(rows, err)
+}
+
+// Creates array of Categories from table row data
+func parseToTableOfCategories(rows *sql.Rows, err error) ([]*models.Category, error) {
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
-	bks := make([]*models.Category, 0)
+	categories := make([]*models.Category, 0)
 	for rows.Next() {
 		bk := new(models.Category)
 		err := rows.Scan(
@@ -48,10 +33,10 @@ func GetCategoryByID(ID string) ([]*models.Category, error) {
 		if err != nil {
 			return nil, err
 		}
-		bks = append(bks, bk)
+		categories = append(categories, bk)
 	}
 	if err = rows.Err(); err != nil {
 		return nil, err
 	}
-	return bks, nil
+	return categories, nil
 }
