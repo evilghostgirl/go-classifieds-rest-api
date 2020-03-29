@@ -5,12 +5,13 @@ This is little project what serves data (classifieds, localizations, users info)
 * localhost:3000/classifieds/
 * localhost:3000/classifieds/{item}
 * localhost:3000/classifieds?title={title}
+* localhost:3000/classifieds?localizationid={localizationid}
 * localhost:3000/classifieds/{id}
 * localhost:3000/categories
 * localhost:3000/categories/{id}
 * localhost:3000/users
 * localhost:3000/users/{id}
-
+* localhost:3000/users?localizationid={localizationid}
 
 ## Setup
 ``` sh 
