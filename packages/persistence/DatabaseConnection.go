@@ -13,10 +13,10 @@ func InitDB(dataSourceName string) {
 	var err error
 	db, err = sql.Open("postgres", dataSourceName)
 	if err != nil {
-		log.Panic(err)
+		log.Print(err)
 	}
 
 	if err = db.Ping(); err != nil {
-		log.Panic(err)
+		log.Print(err)
 	}
 }

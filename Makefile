@@ -7,4 +7,4 @@ adminer:
 	docker run --rm -ti --network host adminer
 
 migrate:
-	migrate -source file://migrations -database postgres://postgres:secret@localhost/postgres?sslmode=disable up
+	migrate -source file://migrations -database "postgres://postgres:secret@localhost/postgres?sslmode=disable" up
