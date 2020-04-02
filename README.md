@@ -1,6 +1,6 @@
 # Simple CRUD server written in Go!
 
-This is little project what serves data (classifieds, localizations, users info) for my android app - Locally. 
+This is little project which serves data (classifieds, localizations, users info) for my android app - Locally. 
 ## GET Endpoints:
 * localhost:3000/classifieds/
 * localhost:3000/classifieds/{item}
