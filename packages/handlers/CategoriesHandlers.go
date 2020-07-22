@@ -8,7 +8,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func ListAllCategories(w http.ResponseWriter, r *http.Request) {
+func GetAllCategories(w http.ResponseWriter, r *http.Request) {
 
 	categories, err := persistence.GetAllCategories()
 	if err != nil {
@@ -23,7 +23,7 @@ func ListAllCategories(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func ListCategoryByID(w http.ResponseWriter, r *http.Request) {
+func GetCategoryByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
 	categories, err := persistence.GetCategoryByID(vars["ID"])

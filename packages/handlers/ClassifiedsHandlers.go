@@ -10,14 +10,14 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func ListAllClassifieds(w http.ResponseWriter, r *http.Request) {
+func GetAllOffers(w http.ResponseWriter, r *http.Request) {
 
 	classifieds, err := persistence.GetAllClassifieds()
 	toJSON(w, classifieds, err)
 
 }
 
-func ListClassifiedByID(w http.ResponseWriter, r *http.Request) {
+func GetOfferByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
 	classifieds, err := persistence.GetClassifiedByID(vars["ID"])
@@ -25,7 +25,7 @@ func ListClassifiedByID(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func ListClassifiedsByTitle(w http.ResponseWriter, r *http.Request) {
+func GetOffersByTitle(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
 	classifieds, err := persistence.GetClassifiedsByTitle(vars["title"])
@@ -33,7 +33,7 @@ func ListClassifiedsByTitle(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func ListClassifiedsByTitle1(w http.ResponseWriter, r *http.Request) {
+func GetOffersByTitle1(w http.ResponseWriter, r *http.Request) {
 	title := r.FormValue("title")
 	fmt.Printf("title: %s", title)
 	classifieds, err := persistence.GetClassifiedsByTitle(title)
@@ -41,7 +41,7 @@ func ListClassifiedsByTitle1(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func ListClassifiedsByLocalizationID(w http.ResponseWriter, r *http.Request) {
+func GetOffersByLocalizationID(w http.ResponseWriter, r *http.Request) {
 	localizationID := r.FormValue("localizationid")
 	classifieds, err := persistence.GetClassifiedsByLocalizationID(localizationID)
 	toJSON(w, classifieds, err)

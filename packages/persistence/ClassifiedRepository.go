@@ -7,26 +7,26 @@ import (
 
 func GetAllClassifieds() ([]*models.Classified, error) {
 	rows, err := db.Query("SELECT * FROM classifieds")
-	return parseToTableOfClassifieds(rows, err)
+	return parseToClassifieds(rows, err)
 }
 
 func GetClassifiedByID(ID string) ([]*models.Classified, error) {
 	rows, err := db.Query("SELECT * FROM classifieds WHERE id = $1", ID)
-	return parseToTableOfClassifieds(rows, err)
+	return parseToClassifieds(rows, err)
 }
 
 func GetClassifiedsByTitle(title string) ([]*models.Classified, error) {
 	rows, err := db.Query("SELECT * FROM classifieds WHERE title LIKE '%' || $1 || '%' ", title)
-	return parseToTableOfClassifieds(rows, err)
+	return parseToClassifieds(rows, err)
 }
 
 func GetClassifiedsByLocalizationID(localizationID string) ([]*models.Classified, error) {
 	rows, err := db.Query("SELECT * FROM classifieds WHERE localizationid LIKE '%' || $1 || '%' ", localizationID)
-	return parseToTableOfClassifieds(rows, err)
+	return parseToClassifieds(rows, err)
 }
 
 // Creates array of Classifieds from table row data
-func parseToTableOfClassifieds(rows *sql.Rows, err error) ([]*models.Classified, error) {
+func parseToClassifieds(rows *sql.Rows, err error) ([]*models.Classified, error) {
 	if err != nil {
 		return nil, err
 	}

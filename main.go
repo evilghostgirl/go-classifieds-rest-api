@@ -16,20 +16,20 @@ func main() {
 	// config.RegisterInServiceDiscovery()
 
 	persistence.InitDB("postgres://postgres:secret@localhost/postgres?sslmode=disable")
-	r.HandleFunc("/classifieds", handlers.ListClassifiedsByTitle1).Methods("GET").Queries("title", "{title}")
-	r.HandleFunc("/classifieds", handlers.ListClassifiedsByLocalizationID).Methods("GET").Queries("localizationid", "{localizationid}")
-	r.HandleFunc("/classifieds", handlers.ListAllClassifieds).Methods("GET")
-	r.HandleFunc("/classifieds/", handlers.ListAllClassifieds).Methods("GET")
-	r.HandleFunc("/classifieds/{ID}", handlers.ListClassifiedByID).Methods("GET")
+	r.HandleFunc("/offers", handlers.GetOffersByTitle1).Methods("GET").Queries("title", "{title}")
+	r.HandleFunc("/offers", handlers.GetOffersByLocalizationID).Methods("GET").Queries("localizationid", "{localizationid}")
+	r.HandleFunc("/offers", handlers.GetAllOffers).Methods("GET")
+	r.HandleFunc("/offers/", handlers.GetAllOffers).Methods("GET")
+	r.HandleFunc("/offers/{ID}", handlers.GetOfferByID).Methods("GET")
 
-	r.HandleFunc("/categories/{ID}", handlers.ListCategoryByID).Methods("GET")
-	r.HandleFunc("/categories", handlers.ListAllCategories).Methods("GET")
-	r.HandleFunc("/categories/", handlers.ListAllCategories).Methods("GET")
+	r.HandleFunc("/categories/{ID}", handlers.GetCategoryByID).Methods("GET")
+	r.HandleFunc("/categories", handlers.GetAllCategories).Methods("GET")
+	r.HandleFunc("/categories/", handlers.GetAllCategories).Methods("GET")
 
-	r.HandleFunc("/users", handlers.ListUsersByLocalizationID).Methods("GET").Queries("localizationid", "{localizationid}")
-	r.HandleFunc("/users/{ID}", handlers.ListUserByID).Methods("GET")
-	r.HandleFunc("/users", handlers.ListAllUsers).Methods("GET")
-	r.HandleFunc("/users/", handlers.ListAllUsers).Methods("GET")
+	r.HandleFunc("/users", handlers.GetUsersByLocalizationID).Methods("GET").Queries("localizationid", "{localizationid}")
+	r.HandleFunc("/users/{ID}", handlers.GetUserByID).Methods("GET")
+	r.HandleFunc("/users", handlers.GetAllUsers).Methods("GET")
+	r.HandleFunc("/users/", handlers.GetAllUsers).Methods("GET")
 
 	http.ListenAndServe(":3000", r)
 

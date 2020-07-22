@@ -8,7 +8,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func ListAllUsers(w http.ResponseWriter, r *http.Request) {
+func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 
 	users, err := persistence.GetAllUsers()
 	if err != nil {
@@ -23,7 +23,7 @@ func ListAllUsers(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func ListUserByID(w http.ResponseWriter, r *http.Request) {
+func GetUserByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
 	users, err := persistence.GetUserByID(vars["ID"])
@@ -39,7 +39,7 @@ func ListUserByID(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func ListUsersByLocalizationID(w http.ResponseWriter, r *http.Request) {
+func GetUsersByLocalizationID(w http.ResponseWriter, r *http.Request) {
 	localizationID := r.FormValue("localizationid")
 	users, err := persistence.GetUsersByLocalizationID(localizationID)
 	if err != nil {
