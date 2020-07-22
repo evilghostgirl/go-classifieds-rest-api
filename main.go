@@ -21,6 +21,7 @@ func main() {
 	r.HandleFunc("/offers", handlers.GetAllOffers).Methods("GET")
 	r.HandleFunc("/offers/", handlers.GetAllOffers).Methods("GET")
 	r.HandleFunc("/offers/{ID}", handlers.GetOfferByID).Methods("GET")
+	r.HandleFunc("/offers/", handlers.CreateOffer).Methods("POST")
 
 	r.HandleFunc("/categories/{ID}", handlers.GetCategoryByID).Methods("GET")
 	r.HandleFunc("/categories", handlers.GetAllCategories).Methods("GET")
